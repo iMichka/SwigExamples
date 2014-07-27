@@ -1,0 +1,9 @@
+#bin/bash
+
+PYTHONINCDIR=/usr/local/Cellar/python/2.7.7_1/Frameworks/Python.framework/Headers
+PYTHONLIBDIR=/usr/local/Cellar/python/2.7.7_1/Frameworks/Python.framework/Versions/2.7/lib/python2.7
+
+swig -c++ -python example.i
+g++ -O2 -fPIC -c example.cxx
+g++ -O2 -fPIC -c example_wrap.cxx -I${PYTHONINCDIR}
+g++ -lpython2.7 -L${PYTHONLIBDIR}/config example.o example_wrap.o -o _example.so
